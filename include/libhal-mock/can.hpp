@@ -26,35 +26,6 @@ struct can : public hal::can
     spy_on_receive.reset();
   }
 
-  /**
-   * @brief print can::message_t type using ostreams
-   *
-   * Meant for unit testing, testing and simulation purposes
-   * C++ streams, in general, should not be used for any embedded project that
-   * will ever have to be used on an MCU due to its memory cost.
-   *
-   * @tparam CharT - character type
-   * @tparam Traits - ostream traits type
-   * @param p_ostream - the ostream
-   * @param p_message - object to convert to a string
-   * @return std::basic_ostream<CharT, Traits>& - reference to the ostream
-   */
-  template<class CharT, class Traits>
-  friend std::basic_ostream<CharT, Traits>& operator<<(
-    std::basic_ostream<CharT, Traits>& p_ostream,
-    const hal::can::message_t& p_message)
-  {
-    p_ostream << "{ id: " << std::hex << "0x" << p_message.id;
-    p_ostream << ", length: " << std::dec << unsigned{ p_message.length };
-    p_ostream << ", is_remote_request: " << p_message.is_remote_request;
-    p_ostream << ", payload = [";
-    for (const auto& element : p_message.payload) {
-      p_ostream << std::hex << "0x" << unsigned{ element } << ", ";
-    }
-    p_ostream << "] }";
-    return p_ostream;
-  }
-
   /// Spy handler for hal::can::configure()
   spy_handler<settings> spy_configure;
   /// Spy handler for hal::can::send()
@@ -78,3 +49,32 @@ private:
 };
 /** @} */
 }  // namespace hal::mock
+
+/**
+ * @brief print can::message_t type using ostreams
+ *
+ * Meant for unit testing, testing and simulation purposes
+ * C++ streams, in general, should not be used for any embedded project that
+ * will ever have to be used on an MCU due to its memory cost.
+ *
+ * @tparam CharT - character type
+ * @tparam Traits - ostream traits type
+ * @param p_ostream - the ostream
+ * @param p_message - object to convert to a string
+ * @return std::basic_ostream<CharT, Traits>& - reference to the ostream
+ */
+template<class CharT, class Traits>
+std::basic_ostream<CharT, Traits>& operator<<(
+  std::basic_ostream<CharT, Traits>& p_ostream,
+  const hal::can::message_t& p_message)
+{
+  p_ostream << "{ id: " << std::hex << "0x" << p_message.id;
+  p_ostream << ", length: " << std::dec << unsigned{ p_message.length };
+  p_ostream << ", is_remote_request: " << p_message.is_remote_request;
+  p_ostream << ", payload = [";
+  for (const auto& element : p_message.payload) {
+    p_ostream << std::hex << "0x" << unsigned{ element } << ", ";
+  }
+  p_ostream << "] }";
+  return p_ostream;
+}
