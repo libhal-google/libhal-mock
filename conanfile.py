@@ -11,7 +11,7 @@ required_conan_version = ">=1.50.0"
 
 class LibhalMockConan(ConanFile):
     name = "libhal-mock"
-    version = "0.0.1"
+    version = "0.2.0"
     license = "Apache-2.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://libhal.github.io/libhal-mock"
@@ -33,15 +33,13 @@ class LibhalMockConan(ConanFile):
     def _compilers_minimum_version(self):
         return {
             "gcc": "11",
-            "Visual Studio": "17",
-            "msvc": "193",
-            "clang": "13",
-            "apple-clang": "13.1.6"
+            "clang": "14",
+            "apple-clang": "14.0.0"
         }
 
     def requirements(self):
         self.requires("libhal/0.2.0")
-        self.requires("libhal-util/0.2.2")
+        self.requires("libhal-util/0.2.3")
 
     def validate(self):
         if self.settings.get_safe("compiler.cppstd"):
