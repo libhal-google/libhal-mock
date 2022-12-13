@@ -1,8 +1,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/pwm.hpp>
 
-namespace hal {
-boost::ut::suite pwm_mock_test = []() {
+namespace hal::mock {
+void pwm_mock_test()
+{
   using namespace boost::ut;
 
   "hal::mock::pwm::frequency()"_test = []() {
@@ -41,4 +42,4 @@ boost::ut::suite pwm_mock_test = []() {
     expect(expected2 == std::get<0>(mock.spy_duty_cycle.call_history().at(2)));
   };
 };
-}  // namespace hal
+}  // namespace hal::mock

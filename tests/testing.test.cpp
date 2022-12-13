@@ -1,8 +1,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/pwm.hpp>
 
-namespace hal {
-boost::ut::suite testing_utilities_test = []() {
+namespace hal::mock {
+void testing_utilities_test()
+{
   using namespace boost::ut;
 
   spy_handler<int, char> spy;
@@ -127,4 +128,4 @@ boost::ut::suite testing_utilities_test = []() {
   expect(that % 'D' == std::get<1>(spy.call_history().at(3)));
   expect(that % 'D' == spy.history<1>(3));
 };
-}  // namespace hal
+}  // namespace hal::mock

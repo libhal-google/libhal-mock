@@ -4,7 +4,8 @@
 #include <libhal-mock/adc.hpp>
 
 namespace hal::mock {
-boost::ut::suite adc_mock_test = []() {
+void adc_mock_test()
+{
   using namespace boost::ut;
 
   // Setup

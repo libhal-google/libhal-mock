@@ -1,8 +1,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/servo.hpp>
 
-namespace hal {
-boost::ut::suite servo_mock_test = []() {
+namespace hal::mock {
+void servo_mock_test()
+{
   using namespace boost::ut;
 
   "hal::mock::servo::position()"_test = []() {
@@ -22,4 +23,4 @@ boost::ut::suite servo_mock_test = []() {
     expect(expected2 == std::get<0>(mock.spy_position.call_history().at(1)));
   };
 };
-}  // namespace hal
+}  // namespace hal::mock

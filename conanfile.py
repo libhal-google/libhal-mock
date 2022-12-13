@@ -11,7 +11,7 @@ required_conan_version = ">=1.50.0"
 
 class LibhalMockConan(ConanFile):
     name = "libhal-mock"
-    version = "0.2.1"
+    version = "0.2.2"
     license = "Apache-2.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://libhal.github.io/libhal-mock"
@@ -38,8 +38,8 @@ class LibhalMockConan(ConanFile):
         }
 
     def requirements(self):
-        self.requires("libhal/0.2.0")
-        self.requires("libhal-util/0.2.3")
+        self.requires("libhal/0.2.2")
+        self.requires("libhal-util/0.2.4")
 
     def validate(self):
         if self.settings.get_safe("compiler.cppstd"):

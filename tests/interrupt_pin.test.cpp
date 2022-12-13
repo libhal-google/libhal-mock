@@ -3,8 +3,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/interrupt_pin.hpp>
 
-namespace hal {
-boost::ut::suite interrupt_pin_mock_test = []() {
+namespace hal::mock {
+void interrupt_pin_mock_test()
+{
   using namespace boost::ut;
 
   "hal::mock::interrupt_pin::configure()"_test = []() {
@@ -72,4 +73,4 @@ boost::ut::suite interrupt_pin_mock_test = []() {
     expect(that % 0 == mock.spy_on_trigger.call_history().size());
   };
 };
-}  // namespace hal
+}  // namespace hal::mock

@@ -2,8 +2,9 @@
 #include <libhal-mock/can.hpp>
 #include <libhal-util/can.hpp>
 
-namespace hal {
-boost::ut::suite can_mock_test = []() {
+namespace hal::mock {
+void can_mock_test()
+{
   using namespace boost::ut;
   "hal::can::configure tests"_test = []() {
     // Setup
@@ -64,12 +65,12 @@ boost::ut::suite can_mock_test = []() {
                                                     .payload = { 'a' },
                                                     .length = 1 };
     const std::function<hal::can::handler> expected1 =
-      [&counter](hal::can::message_t expected_message) {
+      [&counter, expected_message](hal::can::message_t) {
         counter++;
         return expected_message;
       };
     const std::function<hal::can::handler> expected2 =
-      [&counter](hal::can::message_t expected_message) {
+      [&counter, expected_message](hal::can::message_t) {
         counter--;
         return expected_message;
       };
@@ -95,4 +96,4 @@ boost::ut::suite can_mock_test = []() {
     expect(that % -1 == counter);
   };
 };
-}  // namespace hal
+}  // namespace hal::mock

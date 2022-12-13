@@ -3,8 +3,9 @@
 #include <libhal-mock/spi.hpp>
 #include <libhal-util/spi.hpp>
 
-namespace hal {
-boost::ut::suite spi_mock_test = []() {
+namespace hal::mock {
+void spi_mock_test()
+{
   using namespace boost::ut;
 
   "hal::mock::write_only_spi::configure()"_test = []() {
@@ -54,4 +55,4 @@ boost::ut::suite spi_mock_test = []() {
     expect(mock.write_record.size() == 0);
   };
 };
-}  // namespace hal
+}  // namespace hal::mock
