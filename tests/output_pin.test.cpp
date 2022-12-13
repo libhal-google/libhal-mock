@@ -2,8 +2,9 @@
 #include <libhal-mock/output_pin.hpp>
 #include <libhal-util/output_pin.hpp>
 
-namespace hal {
-boost::ut::suite output_pin_mock_test = []() {
+namespace hal::mock {
+void output_pin_mock_test()
+{
   using namespace boost::ut;
 
   "hal::mock::output_pin::configure()"_test = []() {
@@ -75,4 +76,4 @@ boost::ut::suite output_pin_mock_test = []() {
     expect(that % 0 == mock.spy_level.call_history().size());
   };
 };
-}  // namespace hal
+}  // namespace hal::mock

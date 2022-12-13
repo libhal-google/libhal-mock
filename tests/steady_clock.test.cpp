@@ -3,8 +3,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/steady_clock.hpp>
 
-namespace hal {
-boost::ut::suite steady_clock_mock_test = []() {
+namespace hal::mock {
+void steady_clock_mock_test()
+{
   using namespace boost::ut;
 
   // Setup
@@ -31,4 +32,4 @@ boost::ut::suite steady_clock_mock_test = []() {
   expect(that % expected3 == result3);
   expect(!bool{ mock.uptime() });
 };
-}  // namespace hal
+}  // namespace hal::mock

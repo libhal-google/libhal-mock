@@ -1,8 +1,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/timer.hpp>
 
-namespace hal {
-boost::ut::suite timer_mock_test = []() {
+namespace hal::mock {
+void timer_mock_test()
+{
   using namespace boost::ut;
 
   // Setup
@@ -21,4 +22,4 @@ boost::ut::suite timer_mock_test = []() {
   expect(bool{ mock.cancel() });
   expect(true == std::get<0>(mock.spy_cancel.call_history().at(0)));
 };
-}  // namespace hal
+}  // namespace hal::mock

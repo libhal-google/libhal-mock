@@ -4,8 +4,9 @@
 #include <libhal-mock/input_pin.hpp>
 #include <libhal-util/input_pin.hpp>
 
-namespace hal {
-boost::ut::suite input_pin_mock_test = []() {
+namespace hal::mock {
+void input_pin_mock_test()
+{
   using namespace boost::ut;
 
   "hal::mock::input_pin::configure()"_test = []() {
@@ -57,4 +58,4 @@ boost::ut::suite input_pin_mock_test = []() {
     expect(that % 0 == mock.spy_configure.call_history().size());
   };
 };
-}  // namespace hal
+}  // namespace hal::mock

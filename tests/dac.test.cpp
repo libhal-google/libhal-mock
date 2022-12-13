@@ -1,8 +1,9 @@
 #include <boost/ut.hpp>
 #include <libhal-mock/dac.hpp>
 
-namespace hal {
-boost::ut::suite dac_mock_test = []() {
+namespace hal::mock {
+void dac_mock_test()
+{
   using namespace boost::ut;
 
   // Setup
@@ -21,4 +22,4 @@ boost::ut::suite dac_mock_test = []() {
   expect(!mock.write(expected2));
   expect(expected2 == std::get<0>(mock.spy_write.call_history().at(2)));
 };
-}  // namespace hal
+}  // namespace hal::mock
