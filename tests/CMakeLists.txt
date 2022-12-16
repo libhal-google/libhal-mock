@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
 
-set(CMAKE_C_COMPILER "gcc-11")
-set(CMAKE_CXX_COMPILER "g++-11")
-
 project(unit_test VERSION 0.0.1 LANGUAGES CXX)
 
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
@@ -48,7 +45,7 @@ target_link_options(${PROJECT_NAME} PRIVATE
   -fprofile-arcs
   -ftest-coverage)
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  boost::ut
+  Boost::ut
   libhal::libhal
   libhal-util::libhal-util
 )
