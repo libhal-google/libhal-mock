@@ -1,6 +1,8 @@
-#include <boost/ut.hpp>
-#include <libhal-mock/output_pin.hpp>
 #include <libhal-util/output_pin.hpp>
+
+#include <libhal-mock/output_pin.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void output_pin_mock_test()

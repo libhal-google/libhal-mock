@@ -1,7 +1,10 @@
-#include <algorithm>
-#include <boost/ut.hpp>
-#include <libhal-mock/spi.hpp>
 #include <libhal-util/spi.hpp>
+
+#include <algorithm>
+
+#include <libhal-mock/spi.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void spi_mock_test()

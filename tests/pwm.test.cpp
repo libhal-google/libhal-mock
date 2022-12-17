@@ -1,5 +1,6 @@
-#include <boost/ut.hpp>
 #include <libhal-mock/pwm.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void pwm_mock_test()

@@ -1,5 +1,6 @@
-#include <boost/ut.hpp>
 #include <libhal-mock/motor.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void motor_mock_test()

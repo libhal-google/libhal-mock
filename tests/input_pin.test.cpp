@@ -1,8 +1,10 @@
+#include <libhal-util/input_pin.hpp>
+
 #include <deque>
 
-#include <boost/ut.hpp>
 #include <libhal-mock/input_pin.hpp>
-#include <libhal-util/input_pin.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void input_pin_mock_test()

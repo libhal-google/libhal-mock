@@ -1,7 +1,8 @@
+#include <libhal-mock/steady_clock.hpp>
+
 #include <deque>
 
 #include <boost/ut.hpp>
-#include <libhal-mock/steady_clock.hpp>
 
 namespace hal::mock {
 void steady_clock_mock_test()
