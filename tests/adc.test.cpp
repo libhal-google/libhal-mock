@@ -1,7 +1,8 @@
+#include <libhal-mock/adc.hpp>
+
 #include <deque>
 
 #include <boost/ut.hpp>
-#include <libhal-mock/adc.hpp>
 
 namespace hal::mock {
 void adc_mock_test()

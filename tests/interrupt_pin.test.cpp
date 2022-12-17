@@ -1,7 +1,8 @@
+#include <libhal-mock/interrupt_pin.hpp>
+
 #include <deque>
 
 #include <boost/ut.hpp>
-#include <libhal-mock/interrupt_pin.hpp>
 
 namespace hal::mock {
 void interrupt_pin_mock_test()

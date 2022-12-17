@@ -1,6 +1,8 @@
-#include <boost/ut.hpp>
-#include <libhal-mock/can.hpp>
 #include <libhal-util/can.hpp>
+
+#include <libhal-mock/can.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void can_mock_test()

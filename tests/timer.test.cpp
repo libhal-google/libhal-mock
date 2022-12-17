@@ -1,5 +1,6 @@
-#include <boost/ut.hpp>
 #include <libhal-mock/timer.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void timer_mock_test()

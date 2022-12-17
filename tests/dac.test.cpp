@@ -1,5 +1,6 @@
-#include <boost/ut.hpp>
 #include <libhal-mock/dac.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void dac_mock_test()

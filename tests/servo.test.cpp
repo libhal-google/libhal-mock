@@ -1,5 +1,6 @@
-#include <boost/ut.hpp>
 #include <libhal-mock/servo.hpp>
+
+#include <boost/ut.hpp>
 
 namespace hal::mock {
 void servo_mock_test()
