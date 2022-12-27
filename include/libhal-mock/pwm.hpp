@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup pwm
- * @{
- */
-/**
  * @brief Mock pwm implementation for use in unit tests and simulations with spy
  * functions for frequency() and duty_cycle().
  *
@@ -40,5 +36,4 @@ private:
     return spy_duty_cycle.record(p_duty_cycle);
   }
 };
-/** @} */
 }  // namespace hal::mock

@@ -5,11 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup can
- * @{
- */
-
-/**
  * @brief Mock can implementation for use in unit tests and simulations
  *
  */
@@ -47,7 +42,6 @@ private:
     return spy_on_receive.record(p_handler);
   };
 };
-/** @} */
 }  // namespace hal::mock
 
 /**

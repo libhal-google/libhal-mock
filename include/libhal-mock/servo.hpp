@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup servo
- * @{
- */
-/**
  * @brief mock servo implementation for use in unit tests and
  * simulations.
  *
@@ -33,5 +29,4 @@ private:
     return spy_position.record(p_position);
   }
 };
-/** @} */
 }  // namespace hal::mock

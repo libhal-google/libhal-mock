@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup output_pin Output Pin
- * @{
- */
-/**
  * @brief mock output pin for use in unit tests and simulations
  *
  */
@@ -45,5 +41,4 @@ private:
   }
   bool m_current_level = false;
 };
-/** @} */
 }  // namespace hal::mock

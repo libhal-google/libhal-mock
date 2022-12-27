@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup interrupt_pin Interrupt Pin
- * @{
- */
-/**
  * @brief mock interrupt_pin implementation for use in unit tests and
  * simulations.
  *
@@ -41,5 +37,4 @@ private:
     [[maybe_unused]] auto result = spy_on_trigger.record(p_callback);
   }
 };
-/** @} */
 }  // namespace hal::mock

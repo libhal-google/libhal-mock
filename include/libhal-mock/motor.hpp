@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup motor
- * @{
- */
-/**
  * @brief Mock motor implementation for use in unit tests and simulations with a
  * spy function for power()
  *
@@ -33,5 +29,4 @@ private:
     return spy_power.record(p_power);
   };
 };
-/** @} */
 }  // namespace hal::mock

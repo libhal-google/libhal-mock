@@ -6,10 +6,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup steady_clock
- * @{
- */
-/**
  * @brief mock steady_clock implementation for use in unit tests and
  * simulations.
  *
@@ -55,5 +51,4 @@ private:
   hertz m_frequency = 1.0_Hz;
   std::queue<std::uint64_t> m_uptime_values{};
 };
-/** @} */
 }  // namespace hal::mock
