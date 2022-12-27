@@ -12,11 +12,6 @@
 
 namespace hal {
 /**
- * @addtogroup testing
- * @{
- */
-
-/**
  * @brief Helper utility for making mocks for class functions that return
  * status.
  *
@@ -105,7 +100,6 @@ private:
   std::vector<std::tuple<args_t...>> m_call_history{};
   int m_error_trigger = 0;
 };
-/** @} */
 }  // namespace hal
 
 template<typename Rep, typename Period>

@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup adc
- * @{
- */
-/**
  * @brief Mock adc implementation for use in unit tests and simulations.
  */
 struct adc : public hal::adc
@@ -36,5 +32,4 @@ private:
 
   std::queue<float> m_adc_values{};
 };
-/** @} */
 }  // namespace hal::mock

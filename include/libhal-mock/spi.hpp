@@ -6,10 +6,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup spi
- * @{
- */
-/**
  * @brief Mock spi implementation for use in unit tests and simulations with a
  * spy functions for configure() and a record for the transfer() out data. The
  * record ignores the in buffer and just stores the data being sent so it can be
@@ -45,5 +41,4 @@ private:
     return {};
   };
 };
-/** @} */
 }  // namespace hal::mock

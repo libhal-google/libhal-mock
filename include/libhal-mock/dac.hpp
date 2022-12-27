@@ -5,10 +5,6 @@
 
 namespace hal::mock {
 /**
- * @addtogroup dac
- * @{
- */
-/**
  * @brief Mock dac implementation for use in unit tests and simulations with a
  * spy function for write()
  *
@@ -33,5 +29,4 @@ private:
     return spy_write.record(p_value);
   };
 };
-/** @} */
 }  // namespace hal::mock
