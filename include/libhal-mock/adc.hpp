@@ -20,7 +20,7 @@ struct adc : public hal::adc
   }
 
 private:
-  result<float> driver_read() noexcept
+  result<float> driver_read()
   {
     if (m_adc_values.size() == 0) {
       return hal::new_error(std::out_of_range("floats queue is empty!"));

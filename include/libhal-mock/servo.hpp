@@ -24,7 +24,7 @@ struct servo : public hal::servo
   spy_handler<float> spy_position;
 
 private:
-  status driver_position(float p_position) noexcept override
+  status driver_position(float p_position) override
   {
     return spy_position.record(p_position);
   }

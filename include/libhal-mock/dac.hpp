@@ -24,7 +24,7 @@ struct dac : public hal::dac
   spy_handler<float> spy_write;
 
 private:
-  status driver_write(float p_value) noexcept override
+  status driver_write(float p_value) override
   {
     return spy_write.record(p_value);
   };

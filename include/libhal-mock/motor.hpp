@@ -24,7 +24,7 @@ struct motor : public hal::motor
   spy_handler<float> spy_power;
 
 private:
-  status driver_power(float p_power) noexcept override
+  status driver_power(float p_power) override
   {
     return spy_power.record(p_power);
   };

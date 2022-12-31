@@ -68,7 +68,7 @@ public:
    *
    * @return const auto& - reference to the call history vector
    */
-  const auto& call_history() const noexcept
+  const auto& call_history() const
   {
     return m_call_history;
   }
@@ -81,7 +81,7 @@ public:
    * @throws std::out_of_range - if p_call is beyond the size of call_history
    */
   template<size_t ArgumentIndex>
-  const auto& history(size_t p_call) const noexcept
+  const auto& history(size_t p_call) const
   {
     return std::get<ArgumentIndex>(m_call_history.at(p_call));
   }
@@ -90,7 +90,7 @@ public:
    * @brief Reset call recordings and turns off error trigger
    *
    */
-  void reset() noexcept
+  void reset()
   {
     m_call_history.clear();
     m_error_trigger = 0;

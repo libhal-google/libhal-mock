@@ -33,12 +33,12 @@ struct steady_clock : public hal::steady_clock
   }
 
 private:
-  hertz driver_frequency() noexcept
+  hertz driver_frequency()
   {
     return m_frequency;
   }
 
-  result<std::uint64_t> driver_uptime() noexcept
+  result<std::uint64_t> driver_uptime()
   {
     if (m_uptime_values.size() == 0) {
       return hal::new_error(std::out_of_range("uptimes queue is empty!"));
