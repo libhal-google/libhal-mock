@@ -29,15 +29,15 @@ struct can : public hal::can
   spy_handler<std::function<handler>> spy_on_receive;
 
 private:
-  status driver_configure(const settings& p_settings) noexcept override
+  status driver_configure(const settings& p_settings) override
   {
     return spy_configure.record(p_settings);
   };
-  status driver_send(const message_t& p_message) noexcept override
+  status driver_send(const message_t& p_message) override
   {
     return spy_send.record(p_message);
   };
-  status driver_on_receive(std::function<handler> p_handler) noexcept override
+  status driver_on_receive(std::function<handler> p_handler) override
   {
     return spy_on_receive.record(p_handler);
   };

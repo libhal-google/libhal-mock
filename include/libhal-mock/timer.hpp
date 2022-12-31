@@ -31,12 +31,12 @@ struct timer : public hal::timer
 
 private:
   status driver_schedule(std::function<void(void)> p_callback,
-                         std::chrono::nanoseconds p_delay) noexcept override
+                         std::chrono::nanoseconds p_delay) override
   {
     m_is_running = true;
     return spy_schedule.record(p_callback, p_delay);
   };
-  result<bool> driver_is_running() noexcept override
+  result<bool> driver_is_running() override
   {
     auto result = spy_is_running.record(true);
     if (!result) {
@@ -44,7 +44,7 @@ private:
     }
     return m_is_running;
   }
-  status driver_cancel() noexcept override
+  status driver_cancel() override
   {
     m_is_running = false;
     return spy_cancel.record(true);

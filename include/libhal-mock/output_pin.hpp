@@ -26,16 +26,16 @@ struct output_pin : public hal::output_pin
   spy_handler<bool> spy_level;
 
 private:
-  status driver_configure(const settings& p_settings) noexcept override
+  status driver_configure(const settings& p_settings) override
   {
     return spy_configure.record(p_settings);
   }
-  status driver_level(bool p_high) noexcept override
+  status driver_level(bool p_high) override
   {
     m_current_level = p_high;
     return spy_level.record(p_high);
   }
-  result<bool> driver_level() noexcept override
+  result<bool> driver_level() override
   {
     return m_current_level;
   }
