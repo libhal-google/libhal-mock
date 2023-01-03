@@ -32,7 +32,7 @@ private:
   {
     return spy_configure.record(p_settings);
   }
-  void driver_on_trigger(std::function<handler> p_callback) override
+  void driver_on_trigger(hal::function_ref<handler> p_callback) override
   {
     [[maybe_unused]] auto result = spy_on_trigger.record(p_callback);
   }
