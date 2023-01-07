@@ -9,7 +9,9 @@ void timer_mock_test()
 
   // Setup
   hal::mock::timer mock;
-  const std::function<void(void)> expected_callback = []() {};
+  bool callback_stored_successfully = false;
+  const hal::callback<void(void)> expected_callback =
+    [&callback_stored_successfully]() { callback_stored_successfully = true; };
   const std::chrono::nanoseconds expected_delay = {};
 
   // Exercise + Verify

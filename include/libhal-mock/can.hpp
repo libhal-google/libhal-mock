@@ -1,8 +1,8 @@
 #pragma once
 
 #include "testing.hpp"
-#include <libhal/alias.hpp>
 #include <libhal/can.hpp>
+#include <libhal/functional.hpp>
 
 namespace hal::mock {
 /**
@@ -38,7 +38,7 @@ private:
   {
     return spy_send.record(p_message);
   };
-  status driver_on_receive(hal::function_ref<handler> p_handler) override
+  status driver_on_receive(hal::callback<handler> p_handler) override
   {
     return spy_on_receive.record(p_handler);
   };
