@@ -1,7 +1,7 @@
 #pragma once
 
 #include "testing.hpp"
-#include <libhal/alias.hpp>
+#include <libhal/functional.hpp>
 #include <libhal/timer.hpp>
 
 namespace hal::mock {
@@ -31,7 +31,7 @@ struct timer : public hal::timer
   spy_handler<bool> spy_cancel;
 
 private:
-  status driver_schedule(hal::function_ref<void(void)> p_callback,
+  status driver_schedule(hal::callback<void(void)> p_callback,
                          std::chrono::nanoseconds p_delay) override
   {
     m_is_running = true;

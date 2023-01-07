@@ -66,34 +66,25 @@ void can_mock_test()
     constexpr hal::can::message_t expected_message{ .id = 1,
                                                     .payload = { 'a' },
                                                     .length = 1 };
-    const std::function<hal::can::handler> expected1 =
-      [&counter, expected_message](hal::can::message_t) {
-        counter++;
-        return expected_message;
-      };
-    const std::function<hal::can::handler> expected2 =
-      [&counter, expected_message](hal::can::message_t) {
-        counter--;
-        return expected_message;
-      };
+    const hal::callback<hal::can::handler> expected1 =
+      [&counter](const hal::can::message_t) { counter++; };
+    const hal::callback<hal::can::handler> expected2 =
+      [&counter](hal::can::message_t) { counter--; };
     mock.spy_on_receive.trigger_error_on_call(3);
 
     // Exercise + Verify
     expect(bool{ mock.on_receive(expected1) });
-    std::function<hal::can::handler> handler1 =
-      std::get<0>(mock.spy_on_receive.call_history().at(0));
+    auto handler1 = std::get<0>(mock.spy_on_receive.call_history().at(0));
     handler1(expected_message);
     expect(that % 1 == counter);
 
     expect(bool{ mock.on_receive(expected2) });
-    std::function<hal::can::handler> handler2 =
-      std::get<0>(mock.spy_on_receive.call_history().at(1));
+    auto handler2 = std::get<0>(mock.spy_on_receive.call_history().at(1));
     handler2(expected_message);
     expect(that % 0 == counter);
 
     expect(!mock.on_receive(expected2));
-    std::function<hal::can::handler> handler3 =
-      std::get<0>(mock.spy_on_receive.call_history().at(2));
+    auto handler3 = std::get<0>(mock.spy_on_receive.call_history().at(2));
     handler3(expected_message);
     expect(that % -1 == counter);
   };
