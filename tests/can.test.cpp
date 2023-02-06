@@ -73,17 +73,17 @@ void can_mock_test()
     mock.spy_on_receive.trigger_error_on_call(3);
 
     // Exercise + Verify
-    expect(bool{ mock.on_receive(expected1) });
+    mock.on_receive(expected1);
     auto handler1 = std::get<0>(mock.spy_on_receive.call_history().at(0));
     handler1(expected_message);
     expect(that % 1 == counter);
 
-    expect(bool{ mock.on_receive(expected2) });
+    mock.on_receive(expected2);
     auto handler2 = std::get<0>(mock.spy_on_receive.call_history().at(1));
     handler2(expected_message);
     expect(that % 0 == counter);
 
-    expect(!mock.on_receive(expected2));
+    mock.on_receive(expected2);
     auto handler3 = std::get<0>(mock.spy_on_receive.call_history().at(2));
     handler3(expected_message);
     expect(that % -1 == counter);
