@@ -27,7 +27,7 @@ struct can : public hal::can
   /// Spy handler for hal::can::send()
   spy_handler<message_t> spy_send;
   /// Spy handler for hal::can::on_receive()
-  spy_handler<std::function<handler>> spy_on_receive;
+  spy_handler<hal::callback<handler>> spy_on_receive;
 
 private:
   status driver_configure(const settings& p_settings) override
@@ -38,9 +38,9 @@ private:
   {
     return spy_send.record(p_message);
   };
-  status driver_on_receive(hal::callback<handler> p_handler) override
+  void driver_on_receive(hal::callback<handler> p_handler) override
   {
-    return spy_on_receive.record(p_handler);
+    (void)spy_on_receive.record(p_handler);
   };
 };
 }  // namespace hal::mock
