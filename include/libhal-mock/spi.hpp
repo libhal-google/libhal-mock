@@ -33,12 +33,14 @@ private:
   {
     return spy_configure.record(p_settings);
   };
-  status driver_transfer(std::span<const hal::byte> p_data_out,
-                         [[maybe_unused]] std::span<hal::byte> p_data_in,
-                         [[maybe_unused]] hal::byte p_filler) override
+
+  result<transfer_t> driver_transfer(
+    std::span<const hal::byte> p_data_out,
+    [[maybe_unused]] std::span<hal::byte> p_data_in,
+    [[maybe_unused]] hal::byte p_filler) override
   {
     write_record.push_back({ p_data_out.begin(), p_data_out.end() });
-    return {};
+    return transfer_t{};
   };
 };
 }  // namespace hal::mock

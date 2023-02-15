@@ -41,9 +41,11 @@ void output_pin_mock_test()
 
     // Verify
     expect(bool{ result1 });
-    expect(that % true == std::get<0>(mock.spy_level.call_history().at(0)));
+    expect(that % true ==
+           std::get<0>(mock.spy_level.call_history().at(0)).state);
     expect(bool{ result2 });
-    expect(that % false == std::get<0>(mock.spy_level.call_history().at(1)));
+    expect(that % false ==
+           std::get<0>(mock.spy_level.call_history().at(1)).state);
   };
 
   "hal::mock::output_pin::driver_level()"_test = []() {
@@ -58,9 +60,9 @@ void output_pin_mock_test()
 
     // Verify
     expect(bool{ result1 });
-    expect(that % true == result1.value());
+    expect(that % true == result1.value().state);
     expect(bool{ result2 });
-    expect(that % false == result2.value());
+    expect(that % false == result2.value().state);
   };
 
   "hal::mock::output_pin::reset()"_test = []() {

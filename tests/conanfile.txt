@@ -1,6 +1,6 @@
 [requires]
 boost-ext-ut/1.1.9
-libhal-mock/0.3.4
+libhal-mock/1.0.0
 
 [generators]
 CMakeToolchain

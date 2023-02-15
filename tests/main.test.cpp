@@ -7,7 +7,6 @@ extern void interrupt_pin_mock_test();
 extern void motor_mock_test();
 extern void output_pin_mock_test();
 extern void pwm_mock_test();
-extern void servo_mock_test();
 extern void spi_mock_test();
 extern void steady_clock_mock_test();
 extern void testing_utilities_test();
@@ -24,7 +23,6 @@ int main()
   hal::mock::motor_mock_test();
   hal::mock::output_pin_mock_test();
   hal::mock::pwm_mock_test();
-  hal::mock::servo_mock_test();
   hal::mock::spi_mock_test();
   hal::mock::steady_clock_mock_test();
   hal::mock::testing_utilities_test();

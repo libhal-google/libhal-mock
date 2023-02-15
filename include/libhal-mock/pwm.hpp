@@ -27,13 +27,17 @@ struct pwm : public hal::pwm
   spy_handler<float> spy_duty_cycle;
 
 private:
-  status driver_frequency(hertz p_settings) override
+  result<frequency_t> driver_frequency(hertz p_settings) override
   {
-    return spy_frequency.record(p_settings);
+    HAL_CHECK(spy_frequency.record(p_settings));
+    return frequency_t{};
   }
-  status driver_duty_cycle(float p_duty_cycle) override
+
+  result<duty_cycle_t> driver_duty_cycle(float p_duty_cycle) override
   {
-    return spy_duty_cycle.record(p_duty_cycle);
+    HAL_CHECK(spy_duty_cycle.record(p_duty_cycle));
+
+    return duty_cycle_t{};
   }
 };
 }  // namespace hal::mock
