@@ -34,16 +34,20 @@ void input_pin_mock_test()
   "hal::mock::input_pin::set() + level()"_test = []() {
     // Setup
     hal::mock::input_pin mock;
-    std::deque inputs{ true, false, true };
+    std::deque inputs{
+      input_pin::level_t{ .state = true },
+      input_pin::level_t{ .state = false },
+      input_pin::level_t{ .state = true },
+    };
     std::queue queue(inputs);
 
     // Exercise
     mock.set(queue);
 
     // Verify
-    expect(that % true == mock.level().value());
-    expect(that % false == mock.level().value());
-    expect(that % true == mock.level().value());
+    expect(that % true == mock.level().value().state);
+    expect(that % false == mock.level().value().state);
+    expect(that % true == mock.level().value().state);
     expect(!bool{ mock.level() });
   };
   "hal::mock::input_pin::reset()"_test = []() {

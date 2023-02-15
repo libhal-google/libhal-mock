@@ -24,9 +24,10 @@ struct dac : public hal::dac
   spy_handler<float> spy_write;
 
 private:
-  status driver_write(float p_value) override
+  result<write_t> driver_write(float p_value) override
   {
-    return spy_write.record(p_value);
+    HAL_CHECK(spy_write.record(p_value));
+    return write_t{};
   };
 };
 }  // namespace hal::mock

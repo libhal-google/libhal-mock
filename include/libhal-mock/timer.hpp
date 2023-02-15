@@ -31,25 +31,32 @@ struct timer : public hal::timer
   spy_handler<bool> spy_cancel;
 
 private:
-  status driver_schedule(hal::callback<void(void)> p_callback,
-                         std::chrono::nanoseconds p_delay) override
+  result<schedule_t> driver_schedule(hal::callback<void(void)> p_callback,
+                                     std::chrono::nanoseconds p_delay) override
   {
     m_is_running = true;
-    return spy_schedule.record(p_callback, p_delay);
-  };
-  result<bool> driver_is_running() override
+    HAL_CHECK(spy_schedule.record(p_callback, p_delay));
+    return schedule_t{};
+  }
+
+  result<is_running_t> driver_is_running() override
   {
     auto result = spy_is_running.record(true);
     if (!result) {
       return result.error();
     }
-    return m_is_running;
+    return is_running_t{ .is_running = m_is_running };
   }
-  status driver_cancel() override
+
+  result<cancel_t> driver_cancel() override
   {
     m_is_running = false;
-    return spy_cancel.record(true);
+
+    HAL_CHECK(spy_cancel.record(true));
+
+    return cancel_t{};
   }
+
   bool m_is_running = false;
 };
 }  // namespace hal::mock

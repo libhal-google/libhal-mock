@@ -14,22 +14,22 @@ struct adc : public hal::adc
    *
    * @param p_adc_values - queue of floats
    */
-  void set(std::queue<float>& p_adc_values)
+  void set(std::queue<read_t>& p_adc_values)
   {
     m_adc_values = p_adc_values;
   }
 
 private:
-  result<float> driver_read()
+  result<read_t> driver_read() override
   {
     if (m_adc_values.size() == 0) {
       return hal::new_error(std::out_of_range("floats queue is empty!"));
     }
-    float m_current_value = m_adc_values.front();
+    auto m_current_value = m_adc_values.front();
     m_adc_values.pop();
     return m_current_value;
   }
 
-  std::queue<float> m_adc_values{};
+  std::queue<read_t> m_adc_values{};
 };
 }  // namespace hal::mock

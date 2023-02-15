@@ -30,7 +30,7 @@ struct input_pin : public hal::input_pin
    *
    * @param p_levels - queue of actives levels
    */
-  void set(std::queue<bool>& p_levels)
+  void set(std::queue<level_t>& p_levels)
   {
     m_levels = p_levels;
   }
@@ -40,7 +40,7 @@ private:
   {
     return spy_configure.record(p_settings);
   }
-  result<bool> driver_level() override
+  result<level_t> driver_level() override
   {
     // This comparison performs bounds checking because front() and pop() do
     // not bounds check and results in undefined behavior if the queue is empty.
@@ -48,11 +48,11 @@ private:
       return hal::new_error(
         std::out_of_range("input_pin level queue is empty!"));
     }
-    bool m_current_value = m_levels.front();
+    auto m_current_value = m_levels.front();
     m_levels.pop();
     return m_current_value;
   }
 
-  std::queue<bool> m_levels{};
+  std::queue<level_t> m_levels{};
 };
 }  // namespace hal::mock

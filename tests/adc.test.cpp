@@ -10,9 +10,9 @@ void adc_mock_test()
   using namespace boost::ut;
 
   // Setup
-  auto expected1 = float(0.25);
-  auto expected2 = float(0.5);
-  auto expected3 = float(1.0);
+  auto expected1 = adc::read_t{ .sample = 0.25f };
+  auto expected2 = adc::read_t{ .sample = 0.5f };
+  auto expected3 = adc::read_t{ .sample = 1.0f };
   hal::mock::adc mock;
   std::deque percentages{ expected1, expected2, expected3 };
   std::queue queue(percentages);
@@ -24,8 +24,8 @@ void adc_mock_test()
   auto result3 = mock.read().value();
 
   // Verify
-  expect(that % expected1 == result1);
-  expect(that % expected2 == result2);
-  expect(that % expected3 == result3);
+  expect(that % expected1.sample == result1.sample);
+  expect(that % expected2.sample == result2.sample);
+  expect(that % expected3.sample == result3.sample);
 };
 }  // namespace hal::mock

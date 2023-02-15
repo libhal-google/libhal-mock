@@ -60,7 +60,7 @@ public:
       return hal::new_error();
     }
 
-    return {};
+    return hal::success();
   }
 
   /**
