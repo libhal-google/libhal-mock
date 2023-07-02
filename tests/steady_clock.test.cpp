@@ -36,10 +36,10 @@ void steady_clock_mock_test()
   // Exercise
   mock.set_frequency(expected_frequency);
   mock.set_uptimes(queue);
-  auto result0 = mock.frequency().value();
-  auto result1 = mock.uptime().value();
-  auto result2 = mock.uptime().value();
-  auto result3 = mock.uptime().value();
+  auto result0 = mock.frequency();
+  auto result1 = mock.uptime();
+  auto result2 = mock.uptime();
+  auto result3 = mock.uptime();
 
   // Verify
   expect(that % expected_frequency.operating_frequency ==
@@ -47,6 +47,5 @@ void steady_clock_mock_test()
   expect(that % expected1.ticks == result1.ticks);
   expect(that % expected2.ticks == result2.ticks);
   expect(that % expected3.ticks == result3.ticks);
-  expect(!bool{ mock.uptime() });
 };
 }  // namespace hal::mock
