@@ -23,7 +23,7 @@ import os
 required_conan_version = ">=1.50.0"
 
 
-class LibhalMockConan(ConanFile):
+class libhal_mock_conan(ConanFile):
     name = "libhal-mock"
     version = "2.0.0"
     license = "Apache-2.0"

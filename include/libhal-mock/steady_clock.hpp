@@ -47,22 +47,24 @@ struct steady_clock : public hal::steady_clock
   }
 
 private:
-  result<frequency_t> driver_frequency()
+  frequency_t driver_frequency()
   {
     return m_frequency;
   }
 
-  result<uptime_t> driver_uptime()
+  uptime_t driver_uptime()
   {
     if (m_uptime_values.size() == 0) {
-      return hal::new_error(std::out_of_range("uptimes queue is empty!"));
+      return m_last_uptime;
     }
-    auto m_current_value = m_uptime_values.front();
+
+    m_last_uptime = m_uptime_values.front();
     m_uptime_values.pop();
-    return m_current_value;
+    return m_last_uptime;
   }
 
   frequency_t m_frequency{ .operating_frequency = 1.0_Hz };
   std::queue<uptime_t> m_uptime_values{};
+  uptime_t m_last_uptime{};
 };
 }  // namespace hal::mock
