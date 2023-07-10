@@ -5,8 +5,6 @@
 [![GitHub stars](https://img.shields.io/github/stars/libhal/libhal-mock.svg)](https://github.com/libhal/libhal-mock/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/libhal/libhal-mock.svg)](https://github.com/libhal/libhal-mock/network)
 [![GitHub issues](https://img.shields.io/github/issues/libhal/libhal-mock.svg)](https://github.com/libhal/libhal-mock/issues)
-[![Latest Version](https://libhal.github.io/libhal-mock/latest_version.svg)](https://github.com/libhal/libhal-mock/blob/main/conanfile.py)
-[![ConanCenter Version](https://repology.org/badge/version-for-repo/conancenter/libhal-mock.svg)](https://conan.io/center/libhal-mock)
 
 Mocks, fakes, simulation and other testing utilities for libhal
 
@@ -23,4 +21,3 @@ Apache 2.0; see [`LICENSE`](LICENSE) for details.
 This project is not an official Google project. It is not supported by
 Google and Google specifically disclaims all warranties as to its quality,
 merchantability, or fitness for a particular purpose.
-
