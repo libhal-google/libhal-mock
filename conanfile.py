@@ -68,8 +68,8 @@ class libhal_mock_conan(ConanFile):
                 f"{self.name} {self.version} requires C++{self._min_cppstd}, which your compiler ({compiler}-{version}) does not support")
 
     def requirements(self):
-        self.requires("libhal/[^2.0.0]")
-        self.requires("libhal-util/[^2.0.0]")
+        self.requires("libhal/[^2.0.0 ]")
+        self.requires("libhal-util/[^2.0.0 || ^3.0.0]")
         self.test_requires("boost-ext-ut/1.1.9")
 
     def layout(self):
