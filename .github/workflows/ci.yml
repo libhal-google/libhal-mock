@@ -3,9 +3,9 @@ name: ✅ Checks
 on:
   workflow_dispatch:
   pull_request:
+  release:
+    types: [published]
   push:
-    tags:
-      - "*"
     branches:
       - main
   schedule:
@@ -15,14 +15,3 @@ jobs:
   ci:
     uses: libhal/ci/.github/workflows/library.yml@4.0.0
     secrets: inherit
-
-  release:
-    needs: [ci]
-    if: startsWith(github.ref, 'refs/tags/')
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          generate_release_notes: true
