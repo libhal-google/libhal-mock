@@ -41,16 +41,15 @@ struct pwm : public hal::pwm
   spy_handler<float> spy_duty_cycle;
 
 private:
-  result<frequency_t> driver_frequency(hertz p_settings) override
+  frequency_t driver_frequency(hertz p_settings) override
   {
-    HAL_CHECK(spy_frequency.record(p_settings));
+    spy_frequency.record(p_settings);
     return frequency_t{};
   }
 
-  result<duty_cycle_t> driver_duty_cycle(float p_duty_cycle) override
+  duty_cycle_t driver_duty_cycle(float p_duty_cycle) override
   {
-    HAL_CHECK(spy_duty_cycle.record(p_duty_cycle));
-
+    spy_duty_cycle.record(p_duty_cycle);
     return duty_cycle_t{};
   }
 };

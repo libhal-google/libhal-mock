@@ -29,13 +29,13 @@ void pwm_mock_test()
     mock.spy_frequency.trigger_error_on_call(3);
 
     // Exercise + Verify
-    expect(bool{ mock.frequency(expected1) });
+    mock.frequency(expected1);
     expect(expected1 == std::get<0>(mock.spy_frequency.call_history().at(0)));
 
-    expect(bool{ mock.frequency(expected2) });
+    mock.frequency(expected2);
     expect(expected2 == std::get<0>(mock.spy_frequency.call_history().at(1)));
 
-    expect(!mock.frequency(expected2));
+    expect(throws([&] { mock.frequency(expected2); }));
     expect(expected2 == std::get<0>(mock.spy_frequency.call_history().at(2)));
   };
 
@@ -47,13 +47,13 @@ void pwm_mock_test()
     mock.spy_duty_cycle.trigger_error_on_call(3);
 
     // Exercise + Verify
-    expect(bool{ mock.duty_cycle(expected1) });
+    mock.duty_cycle(expected1);
     expect(expected1 == std::get<0>(mock.spy_duty_cycle.call_history().at(0)));
 
-    expect(bool{ mock.duty_cycle(expected2) });
+    mock.duty_cycle(expected2);
     expect(expected2 == std::get<0>(mock.spy_duty_cycle.call_history().at(1)));
 
-    expect(!mock.duty_cycle(expected2));
+    expect(throws([&] { mock.duty_cycle(expected2); }));
     expect(expected2 == std::get<0>(mock.spy_duty_cycle.call_history().at(2)));
   };
 };

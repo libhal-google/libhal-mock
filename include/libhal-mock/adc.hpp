@@ -14,8 +14,10 @@
 
 #pragma once
 
-#include <libhal/adc.hpp>
 #include <queue>
+
+#include <libhal/adc.hpp>
+#include <libhal/error.hpp>
 
 namespace hal::mock {
 /**
@@ -34,10 +36,14 @@ struct adc : public hal::adc
   }
 
 private:
-  result<read_t> driver_read() override
+  /**
+   * @return read_t - value popped off of the adc queue
+   * @throws std::out_of_range - error when the adc queue is empty
+   */
+  read_t driver_read() override
   {
-    if (m_adc_values.size() == 0) {
-      return hal::new_error(std::out_of_range("floats queue is empty!"));
+    if (m_adc_values.empty()) {
+      throw std::out_of_range("floats queue is empty!");
     }
     auto m_current_value = m_adc_values.front();
     m_adc_values.pop();

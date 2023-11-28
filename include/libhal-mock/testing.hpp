@@ -19,6 +19,7 @@
 #include <chrono>
 #include <ios>
 #include <span>
+#include <string_view>
 #include <tuple>
 #include <vector>
 
@@ -46,13 +47,10 @@ public:
    * of recordings.
    *
    * @param p_call_count_before_trigger - how many calls before an error is
-   * returned.
+   * thrown.
    */
-  void trigger_error_on_call(int p_call_count_before_trigger)
+  void trigger_error_on_call(std::uint32_t p_call_count_before_trigger)
   {
-    if (p_call_count_before_trigger < 0) {
-      throw std::range_error("trigger_error_on_call() must be 0 or above");
-    }
     m_error_trigger = p_call_count_before_trigger;
   }
 
@@ -60,21 +58,19 @@ public:
    * @brief Record the arguments of a function being spied on.
    *
    * @param p_args - arguments to record
-   * @return status - success or failure
-   * error trigger has been reached.
+   * @throws std::runtime_error - when the error trigger is reached
    */
-  [[nodiscard]] status record(args_t... p_args)
+  void record(args_t... p_args)
   {
     m_call_history.push_back(std::make_tuple(p_args...));
 
     if (m_error_trigger > 1) {
       m_error_trigger--;
-    } else if (m_error_trigger == 1) {
-      m_error_trigger--;
-      return hal::new_error();
     }
 
-    return hal::success();
+    if (m_error_trigger == 0) {
+      throw std::runtime_error("record error trigger reached!");
+    }
   }
 
   /**
@@ -112,7 +108,7 @@ public:
 
 private:
   std::vector<std::tuple<args_t...>> m_call_history{};
-  int m_error_trigger = 0;
+  std::uint32_t m_error_trigger = 0;
 };
 }  // namespace hal
 
@@ -121,27 +117,30 @@ inline std::ostream& operator<<(
   std::ostream& p_os,
   const std::chrono::duration<Rep, Period>& p_duration)
 {
-  return p_os << p_duration.count() << " * (" << Period::num << "/"
-              << Period::den << ")s";
+  using namespace std::literals;
+  p_os << p_duration.count() << " * ("sv << Period::num << "/"sv << Period::den
+       << ")s"sv;
 }
 
 template<typename T, size_t size>
 inline std::ostream& operator<<(std::ostream& p_os,
                                 const std::array<T, size>& p_array)
 {
-  p_os << "{";
+  using namespace std::literals;
+  p_os << "{"sv;
   for (const auto& element : p_array) {
-    p_os << element << ", ";
+    p_os << element << ", "sv;
   }
-  return p_os << "}\n";
+  return p_os << "}\n"sv;
 }
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& p_os, const std::span<T>& p_array)
 {
-  p_os << "{";
+  using namespace std::literals;
+  p_os << "{"sv;
   for (const auto& element : p_array) {
-    p_os << element << ", ";
+    p_os << element << ", "sv;
   }
-  return p_os << "}\n";
+  return p_os << "}\n"sv;
 }

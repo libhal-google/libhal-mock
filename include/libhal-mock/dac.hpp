@@ -38,9 +38,9 @@ struct dac : public hal::dac
   spy_handler<float> spy_write;
 
 private:
-  result<write_t> driver_write(float p_value) override
+  write_t driver_write(float p_value) override
   {
-    HAL_CHECK(spy_write.record(p_value));
+    spy_write.record(p_value);
     return write_t{};
   };
 };

@@ -54,17 +54,15 @@ private:
 
   uptime_t driver_uptime()
   {
-    if (m_uptime_values.size() == 0) {
-      return m_last_uptime;
+    if (m_uptime_values.empty()) {
+      throw std::out_of_range("uptime queue is empty!");
     }
-
-    m_last_uptime = m_uptime_values.front();
+    auto m_current_value = m_uptime_values.front();
     m_uptime_values.pop();
-    return m_last_uptime;
+    return m_current_value;
   }
 
   frequency_t m_frequency{ .operating_frequency = 1.0_Hz };
   std::queue<uptime_t> m_uptime_values{};
-  uptime_t m_last_uptime{};
 };
 }  // namespace hal::mock

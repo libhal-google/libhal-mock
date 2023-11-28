@@ -38,9 +38,9 @@ struct motor : public hal::motor
   spy_handler<float> spy_power;
 
 private:
-  result<power_t> driver_power(float p_power) override
+  power_t driver_power(float p_power) override
   {
-    HAL_CHECK(spy_power.record(p_power));
+    spy_power.record(p_power);
     return power_t{};
   };
 };
