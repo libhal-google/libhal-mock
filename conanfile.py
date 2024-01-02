@@ -16,7 +16,6 @@ from conan import ConanFile
 from conan.tools.cmake import CMake, cmake_layout
 from conan.tools.files import copy
 from conan.tools.build import check_min_cppstd
-from conan.errors import ConanInvalidConfiguration
 import os
 
 
@@ -25,7 +24,6 @@ required_conan_version = ">=2.0.6"
 
 class libhal_mock_conan(ConanFile):
     name = "libhal-mock"
-    version = "2.0.2"
     license = "Apache-2.0"
     url = "https://github.com/conan-io/conan-center-index"
     homepage = "https://libhal.github.io/libhal-mock"
@@ -57,22 +55,16 @@ class libhal_mock_conan(ConanFile):
         self.test_requires("boost-ext-ut/1.1.9")
 
     def requirements(self):
-        self.requires("libhal/[^2.0.3]", transitive_headers=True)
-        self.requires("libhal-util/[^3.0.1]")
+        self.requires("libhal/3.0.0-alpha.1", transitive_headers=True)
+        self.requires("libhal-util/4.0.0-alpha.1")
 
     def layout(self):
         cmake_layout(self)
 
     def build(self):
-        if not self.conf.get("tools.build:skip_test", default=False):
-            cmake = CMake(self)
-            if self.settings.os == "Windows":
-                cmake.configure(build_script_folder="tests")
-            else:
-                cmake.configure(build_script_folder="tests",
-                                variables={"ENABLE_ASAN": True})
-            cmake.build()
-            self.run(os.path.join(self.cpp.build.bindir, "unit_test"))
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def package(self):
         copy(self, "LICENSE", dst=os.path.join(

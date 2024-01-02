@@ -28,13 +28,13 @@ void motor_mock_test()
   mock.spy_power.trigger_error_on_call(3);
 
   // Exercise + Verify
-  expect(bool{ mock.power(expected1) });
+  mock.power(expected1);
   expect(expected1 == std::get<0>(mock.spy_power.call_history().at(0)));
 
-  expect(bool{ mock.power(expected2) });
+  mock.power(expected2);
   expect(expected2 == std::get<0>(mock.spy_power.call_history().at(1)));
 
-  expect(!mock.power(expected2));
+  throws([&]() { mock.power(expected2); });
   expect(expected2 == std::get<0>(mock.spy_power.call_history().at(2)));
 };
 }  // namespace hal::mock

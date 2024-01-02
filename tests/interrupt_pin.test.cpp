@@ -33,12 +33,10 @@ void interrupt_pin_mock_test()
     hal::mock::interrupt_pin mock;
 
     // Exercise
-    auto result1 = mock.configure(mock_settings_default);
-    auto result2 = mock.configure(mock_settings_custom);
+    mock.configure(mock_settings_default);
+    mock.configure(mock_settings_custom);
 
     // Verify
-    expect(bool{ result1 });
-    expect(bool{ result2 });
     expect(mock_settings_default.resistor ==
            std::get<0>(mock.spy_configure.call_history().at(0)).resistor);
     expect(mock_settings_custom.resistor ==
@@ -75,9 +73,9 @@ void interrupt_pin_mock_test()
     constexpr hal::interrupt_pin::settings mock_settings_default{};
     const hal::callback<void(bool)> expected_callback = [](bool) {};
     hal::mock::interrupt_pin mock;
-    (void)mock.configure(mock_settings_default);
+    mock.configure(mock_settings_default);
     expect(that % 1 == mock.spy_configure.call_history().size());
-    (void)mock.on_trigger(expected_callback);
+    mock.on_trigger(expected_callback);
     expect(that % 1 == mock.spy_on_trigger.call_history().size());
 
     // Exercise

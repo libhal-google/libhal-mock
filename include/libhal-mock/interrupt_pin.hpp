@@ -42,13 +42,13 @@ struct interrupt_pin : public hal::interrupt_pin
   spy_handler<std::function<handler>> spy_on_trigger;
 
 private:
-  status driver_configure(const settings& p_settings) override
+  void driver_configure(const settings& p_settings) override
   {
-    return spy_configure.record(p_settings);
+    spy_configure.record(p_settings);
   }
   void driver_on_trigger(hal::callback<handler> p_callback) override
   {
-    [[maybe_unused]] auto result = spy_on_trigger.record(p_callback);
+    spy_on_trigger.record(p_callback);
   }
 };
 }  // namespace hal::mock

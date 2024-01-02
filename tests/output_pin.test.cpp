@@ -40,9 +40,7 @@ void output_pin_mock_test()
     expect(mock_settings_default ==
            std::get<0>(mock.spy_configure.call_history().at(0)));
     expect(mock_settings_custom ==
-           std::get<0>(mock.spy_configure.call_history().at(1)));
-    expect(bool{ result1 });
-    expect(bool{ result2 });
+           std::get<0>(mock.
   };
 
   "hal::mock::output_pin::driver_level(bool)"_test = []() {
@@ -54,10 +52,8 @@ void output_pin_mock_test()
     auto result2 = mock.level(false);
 
     // Verify
-    expect(bool{ result1 });
     expect(that % true ==
            std::get<0>(mock.spy_level.call_history().at(0)).state);
-    expect(bool{ result2 });
     expect(that % false ==
            std::get<0>(mock.spy_level.call_history().at(1)).state);
   };
@@ -67,24 +63,22 @@ void output_pin_mock_test()
     hal::mock::output_pin mock;
 
     // Exercise
-    (void)mock.level(true);
+    mock.level(true);
     auto result1 = mock.level();
-    (void)mock.level(false);
+    mock.level(false);
     auto result2 = mock.level();
 
     // Verify
-    expect(bool{ result1 });
-    expect(that % true == result1.value().state);
-    expect(bool{ result2 });
-    expect(that % false == result2.value().state);
+    expect(that % true == result1.state);
+    expect(that % false == result2.state);
   };
 
   "hal::mock::output_pin::reset()"_test = []() {
     // Setup
     constexpr hal::output_pin::settings mock_settings_default{};
     hal::mock::output_pin mock;
-    (void)mock.configure(mock_settings_default);
-    (void)mock.level(false);
+    mock.configure(mock_settings_default);
+    mock.level(false);
 
     // Exercise
     mock.reset();

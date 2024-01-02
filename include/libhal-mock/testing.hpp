@@ -60,10 +60,10 @@ public:
    * @brief Record the arguments of a function being spied on.
    *
    * @param p_args - arguments to record
-   * @return status - success or failure
+   * @return void - success or failure
    * error trigger has been reached.
    */
-  [[nodiscard]] status record(args_t... p_args)
+  [[nodiscard]] void record(args_t... p_args)
   {
     m_call_history.push_back(std::make_tuple(p_args...));
 

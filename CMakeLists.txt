@@ -14,11 +14,29 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-project(test_package LANGUAGES CXX)
+# Because libhal-mock is a header only library, this cmake file only builds and
+# executes the unit tests
+project(libhal LANGUAGES CXX)
 
-find_package(libhal-mock REQUIRED CONFIG)
+libhal_unit_test(SOURCES
+  tests/main.test.cpp
+  tests/adc.test.cpp
+  tests/can.test.cpp
+  tests/dac.test.cpp
+  tests/input_pin.test.cpp
+  tests/interrupt_pin.test.cpp
+  tests/motor.test.cpp
+  tests/output_pin.test.cpp
+  tests/pwm.test.cpp
+  tests/spi.test.cpp
+  tests/steady_clock.test.cpp
+  tests/testing.test.cpp
+  tests/timer.test.cpp
 
-add_executable(${PROJECT_NAME} main.cpp)
-target_include_directories(${PROJECT_NAME} PUBLIC .)
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
-target_link_libraries(${PROJECT_NAME} PRIVATE libhal::mock)
+  PACKAGES
+  libhal
+  libhal-util
+
+  LINK_LIBRARIES
+  libhal
+  libhal::util)

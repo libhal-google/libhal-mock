@@ -34,10 +34,10 @@ struct adc : public hal::adc
   }
 
 private:
-  result<read_t> driver_read() override
+  read_t driver_read() override
   {
     if (m_adc_values.size() == 0) {
-      return hal::new_error(std::out_of_range("floats queue is empty!"));
+      throw std::out_of_range("floats queue is empty!");
     }
     auto m_current_value = m_adc_values.front();
     m_adc_values.pop();

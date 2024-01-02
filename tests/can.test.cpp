@@ -32,13 +32,13 @@ void can_mock_test()
     mock.spy_configure.trigger_error_on_call(3);
 
     // Exercise + Verify
-    expect(bool{ mock.configure(expected1) });
+    mock.configure(expected1);
     expect(expected1 == std::get<0>(mock.spy_configure.call_history().at(0)));
 
-    expect(bool{ mock.configure(expected2) });
+    mock.configure(expected2);
     expect(expected2 == std::get<0>(mock.spy_configure.call_history().at(1)));
 
-    expect(!mock.configure(expected2));
+    throws([&]() { mock.configure(expected2); });
     expect(expected2 == std::get<0>(mock.spy_configure.call_history().at(2)));
   };
 
@@ -54,19 +54,19 @@ void can_mock_test()
     mock.spy_send.trigger_error_on_call(3);
 
     // Exercise + Verify
-    expect(bool{ mock.send(expected1) });
+    mock.send(expected1);
     expect(that % expected1.payload ==
            std::get<0>(mock.spy_send.call_history().at(0)).payload);
     expect(that % expected1.id ==
            std::get<0>(mock.spy_send.call_history().at(0)).id);
 
-    expect(bool{ mock.send(expected2) });
+    mock.send(expected2);
     expect(that % expected2.payload ==
            std::get<0>(mock.spy_send.call_history().at(1)).payload);
     expect(that % expected2.id ==
            std::get<0>(mock.spy_send.call_history().at(1)).id);
 
-    expect(!mock.send(expected2));
+    throws([&]() { mock.send(expected2); });
     expect(that % expected2.payload ==
            std::get<0>(mock.spy_send.call_history().at(2)).payload);
     expect(that % expected2.id ==

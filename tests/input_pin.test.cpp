@@ -34,14 +34,12 @@ void input_pin_mock_test()
     hal::mock::input_pin mock;
 
     // Exercise
-    auto result1 = mock.configure(mock_settings_default);
-    auto result2 = mock.configure(mock_settings_custom);
+    mock.configure(mock_settings_default);
+    mock.configure(mock_settings_custom);
 
     // Verify
-    expect(bool{ result1 });
     expect(mock_settings_default ==
            std::get<0>(mock.spy_configure.call_history().at(0)));
-    expect(bool{ result2 });
     expect(mock_settings_custom ==
            std::get<0>(mock.spy_configure.call_history().at(1)));
   };
@@ -59,16 +57,16 @@ void input_pin_mock_test()
     mock.set(queue);
 
     // Verify
-    expect(that % true == mock.level().value().state);
-    expect(that % false == mock.level().value().state);
-    expect(that % true == mock.level().value().state);
-    expect(!bool{ mock.level() });
+    expect(that % true == mock.level().state);
+    expect(that % false == mock.level().state);
+    expect(that % true == mock.level().state);
+    throws([&]() { mock.level(); });
   };
   "hal::mock::input_pin::reset()"_test = []() {
     // Setup
     constexpr hal::input_pin::settings mock_settings_default{};
     hal::mock::input_pin mock;
-    (void)mock.configure(mock_settings_default);
+    mock.configure(mock_settings_default);
     expect(that % 1 == mock.spy_configure.call_history().size());
 
     // Exercise

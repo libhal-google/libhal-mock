@@ -33,9 +33,9 @@ void adc_mock_test()
 
   // Exercise
   mock.set(queue);
-  auto result1 = mock.read().value();
-  auto result2 = mock.read().value();
-  auto result3 = mock.read().value();
+  auto result1 = mock.read();
+  auto result2 = mock.read();
+  auto result3 = mock.read();
 
   // Verify
   expect(that % expected1.sample == result1.sample);

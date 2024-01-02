@@ -43,18 +43,16 @@ struct write_only_spi : public hal::spi
   std::vector<std::vector<hal::byte>> write_record;
 
 private:
-  status driver_configure(const settings& p_settings) override
+  void driver_configure(const settings& p_settings) override
   {
-    return spy_configure.record(p_settings);
+    spy_configure.record(p_settings);
   };
 
-  result<transfer_t> driver_transfer(
-    std::span<const hal::byte> p_data_out,
-    [[maybe_unused]] std::span<hal::byte> p_data_in,
-    [[maybe_unused]] hal::byte p_filler) override
+  void driver_transfer(std::span<const hal::byte> p_data_out,
+                       [[maybe_unused]] std::span<hal::byte> p_data_in,
+                       [[maybe_unused]] hal::byte p_filler) override
   {
     write_record.push_back({ p_data_out.begin(), p_data_out.end() });
-    return transfer_t{};
   };
 };
 }  // namespace hal::mock

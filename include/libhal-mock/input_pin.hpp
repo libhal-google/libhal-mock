@@ -50,17 +50,16 @@ struct input_pin : public hal::input_pin
   }
 
 private:
-  status driver_configure(const settings& p_settings) override
+  void driver_configure(const settings& p_settings) override
   {
-    return spy_configure.record(p_settings);
+    spy_configure.record(p_settings);
   }
-  result<level_t> driver_level() override
+  level_t driver_level() override
   {
     // This comparison performs bounds checking because front() and pop() do
     // not bounds check and results in undefined behavior if the queue is empty.
     if (m_levels.size() == 0) {
-      return hal::new_error(
-        std::out_of_range("input_pin level queue is empty!"));
+      throw std::out_of_range("input_pin level queue is empty!");
     }
     auto m_current_value = m_levels.front();
     m_levels.pop();
