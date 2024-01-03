@@ -25,6 +25,7 @@ extern void spi_mock_test();
 extern void steady_clock_mock_test();
 extern void testing_utilities_test();
 extern void timer_mock_test();
+extern void servo_mock_test();
 }  // namespace hal::mock
 
 int main()
@@ -41,4 +42,5 @@ int main()
   hal::mock::steady_clock_mock_test();
   hal::mock::testing_utilities_test();
   hal::mock::timer_mock_test();
+  hal::mock::servo_mock_test();
 }
