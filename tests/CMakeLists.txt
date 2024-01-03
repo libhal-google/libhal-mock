@@ -57,6 +57,7 @@ add_executable(${PROJECT_NAME}
   steady_clock.test.cpp
   testing.test.cpp
   timer.test.cpp
+  servo.test.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC . ../include)
