@@ -6,6 +6,13 @@
 [![GitHub forks](https://img.shields.io/github/forks/libhal/libhal-mock.svg)](https://github.com/libhal/libhal-mock/network)
 [![GitHub issues](https://img.shields.io/github/issues/libhal/libhal-mock.svg)](https://github.com/libhal/libhal-mock/issues)
 
+> [!TIP]
+> Mocks in general are useful for small things but agonizing for anything
+> complicated. Testing passing with mocks tend to provide false confidence
+> in the throughoughness of testing. They do help prevent regressions,
+> but if the current behavior has to change, you'll have to refactor.
+
+
 Mocks, fakes, simulation and other testing utilities for libhal
 
 ## Contributing
